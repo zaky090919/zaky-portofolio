@@ -43,23 +43,26 @@
 
 
    // Burger Menu
-	var burgerMenu = function() {
+	// Burger Menu with toggle visibility
+var burgerMenu = function() {
+  $('body').on('click', '.js-fh5co-nav-toggle', function(event){
+    event.preventDefault();
+    var $this = $(this);
+    $this.toggleClass('active');
+    $('#ftco-nav').slideToggle(300); // Toggle menu visibility
+  });
 
-		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
+  // Also hide menu when clicking a menu item (for mobile)
+  $(document).on('click', '#ftco-nav a', function() {
+    var $nav = $('#ftco-nav');
+    var $toggle = $('.js-fh5co-nav-toggle');
+    if ($nav.is(':visible') && $(window).width() < 768) {
+      $nav.slideUp(300);
+      $toggle.removeClass('active');
+    }
+  });
+};
 
-			event.preventDefault();
-
-			if ( $('#ftco-nav').is(':visible') ) {
-				$(this).removeClass('active');
-			} else {
-				$(this).addClass('active');	
-			}
-
-			
-			
-		});
-
-	};
 	burgerMenu();
 
 
